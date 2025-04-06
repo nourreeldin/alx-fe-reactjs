@@ -34,7 +34,6 @@ const RegistrationForm = () => {
     e.preventDefault();
     if (validateForm()) {
       console.log('Form data submitted:', formData);
-
     }
   };
 
