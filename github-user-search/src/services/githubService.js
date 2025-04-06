@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api.github.com/search/users';
-
 export const fetchUserData = async (query, location = '', minRepos = 0) => {
   let searchQuery = `${query}`;
 
@@ -14,7 +12,7 @@ export const fetchUserData = async (query, location = '', minRepos = 0) => {
   }
 
   try {
-    const response = await axios.get(`${BASE_URL}?q=${searchQuery}`);
+    const response = await axios.get(`https://api.github.com/search/users?q=${searchQuery}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching user data:', error);
