@@ -1,31 +1,30 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_GITHUB_API_URL || 'https://api.github.com';
+const BASE_URL = 'https://api.github.com'; 
 
-export const advancedSearchUsers = async ({ query, location, minRepos, page = 1 }) => {
-  let q = query ? `${query} in:login` : '';
-  if (location) q += ` location:${location}`;
-  if (minRepos) q += ` repos:>=${minRepos}`;
 
-  const response = await axios.get(`${BASE_URL}/search/users`, {
-    params: {
-      q,
-      page,
-      per_page: 10,
-    },
-    headers: { Authorization: `token ${import.meta.env.VITE_APP_GITHUB_API_KEY}` }
-  });
+export const fetchUserData = async (query, location = '', minRepos = 0) => {
 
-  const detailedUsers = await Promise.all(
-    response.data.items.map(async (user) => {
-      try {
-        const userDetails = await axios.get(`${BASE_URL}/users/${user.login}`);
-        return { ...user, ...userDetails.data };
-      } catch (err) {
-        return user;
-      }
-    })
-  );
+  let searchQuery = `${query}`;
 
-  return { items: detailedUsers };
+
+  if (location) {
+    searchQuery += ` location:${location}`;
+  }
+
+
+  if (minRepos) {
+    searchQuery += ` repos:>=${minRepos}`;
+  }
+
+
+  try {
+    const response = await axios.get(`${BASE_URL}/search/users`, {
+      params: { q: searchQuery },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw error;
+  }
 };
