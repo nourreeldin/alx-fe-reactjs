@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import WelcomeMessage from './components/WelcomeMessage';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const handleClick = () => {
-    setCount(count + 1);
-  };
-
   return (
     <div className="App">
-      <h1>Welcome to React!</h1>
-      <p>You clicked {count} times</p>
-      <button onClick={handleClick}>Click me</button>
+      <WelcomeMessage />
     </div>
   );
 }
