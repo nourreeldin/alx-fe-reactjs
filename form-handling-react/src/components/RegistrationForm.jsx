@@ -9,12 +9,15 @@ const RegistrationForm = () => {
 
   const [errors, setErrors] = useState({});
 
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
+
 
   const validateForm = () => {
     const validationErrors = {};
@@ -26,11 +29,12 @@ const RegistrationForm = () => {
     return Object.keys(validationErrors).length === 0;
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
       console.log('Form data submitted:', formData);
-      // Mock API submission here
+
     }
   };
 
@@ -41,7 +45,7 @@ const RegistrationForm = () => {
         <input
           type="text"
           name="username"
-          value={formData.username}
+          value={formData.username}  
           onChange={handleChange}
         />
         {errors.username && <span>{errors.username}</span>}
@@ -51,7 +55,7 @@ const RegistrationForm = () => {
         <input
           type="email"
           name="email"
-          value={formData.email}
+          value={formData.email}  
           onChange={handleChange}
         />
         {errors.email && <span>{errors.email}</span>}
@@ -61,7 +65,7 @@ const RegistrationForm = () => {
         <input
           type="password"
           name="password"
-          value={formData.password}
+          value={formData.password}  
           onChange={handleChange}
         />
         {errors.password && <span>{errors.password}</span>}
