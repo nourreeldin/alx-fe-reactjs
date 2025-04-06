@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-const FormikForm = () => {
+const formikForm = () => {
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -16,7 +16,7 @@ const FormikForm = () => {
     }),
     onSubmit: (values) => {
       console.log('Form data submitted:', values);
-      // Mock API submission here
+
     },
   });
 
@@ -63,4 +63,4 @@ const FormikForm = () => {
   );
 };
 
-export default FormikForm;
+export default formikForm;
